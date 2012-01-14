@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DroidFish</string>
+    <string-array name="engine_texts">
+        <item>Stockfish</item>
+        <item>CuckooChess</item>
+    </string-array>
+    <string-array name="engine_values">
+       <item>stockfish</item>
+       <item>cuckoochess</item>
+    </string-array>
+    <string-array name="engine_threads_texts">
+        <item>Automatic</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="engine_threads_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+    <string-array name="moves_per_session_texts">
+        <item>Whole Game</item>
+        <item>1 move</item>
+        <item>10 moves</item>
+        <item>20 moves</item>
+        <item>30 moves</item>
+        <item>40 moves</item>
+        <item>50 moves</item>
+        <item>60 moves</item>
+    </string-array>
+    <string-array name="moves_per_session_values">
+        <item>0</item>
+        <item>1</item>
+        <item>10</item>
+        <item>20</item>
+        <item>30</item>
+        <item>40</item>
+        <item>50</item>
+        <item>60</item>
+    </string-array>
+    <string-array name="time_control_texts">
+        <item>15 seconds</item>
+        <item>30 seconds</item>
+        <item>1 minute</item>
+        <item>2 minutes</item>
+        <item>3 minutes</item>
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>45 minutes</item>
+        <item>60 minutes</item>
+        <item>90 minutes</item>
+        <item>120 minutes</item>
+    </string-array>
+    <string-array name="time_control_values">
+        <item>15000</item>
+        <item>30000</item>
+        <item>60000</item>
+        <item>120000</item>
+        <item>180000</item>
+        <item>300000</item>
+        <item>600000</item>
+        <item>900000</item>
+        <item>1800000</item>
+        <item>2700000</item>
+        <item>3600000</item>
+        <item>5400000</item>
+        <item>7200000</item>
+    </string-array>
+    <string-array name="time_increment_texts">
+        <item>0s</item>
+        <item>1s</item>
+        <item>2s</item>
+        <item>3s</item>
+        <item>4s</item>
+        <item>5s</item>
+        <item>10s</item>
+        <item>12s</item>
+        <item>15s</item>
+        <item>30s</item>
+        <item>60s</item>
+    </string-array>
+    <string-array name="time_increment_values">
+        <item>0</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+        <item>4000</item>
+        <item>5000</item>
+        <item>10000</item>
+        <item>12000</item>
+        <item>15000</item>
+        <item>30000</item>
+        <item>60000</item>
+    </string-array>
+    <string-array name="font_size_texts">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Larger</item>
+    </string-array>
+    <string-array name="font_size_values">
+        <item>10</item>
+        <item>12</item>
+        <item>16</item>
+        <item>21</item>
+    </string-array>
+    <string-array name="thinking_arrows_texts">
+        <item>No arrows</item>
+        <item>Max 1 Arrow</item>
+        <item>Max 2 Arrows</item>
+        <item>Max 3 Arrows</item>
+        <item>Max 4 Arrows</item>
+        <item>Max 5 Arrows</item>
+        <item>Max 6 Arrows</item>
+    </string-array>
+    <string-array name="thinking_arrows_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+    </string-array>
+    <string-array name="scroll_sensitivity_texts">
+        <item>Off</item>
+        <item>Slowest</item>
+        <item>Slow</item>
+        <item>Normal</item>
+        <item>Fast</item>
+        <item>Fastest</item>
+    </string-array>
+    <string-array name="scroll_sensitivity_values">
+        <item>0</item>
+        <item>6</item>
+        <item>3</item>
+        <item>2</item>
+        <item>1</item>
+        <item>0.5</item>
+    </string-array>
+    <string-array name="book_line_length_values">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>30</item>
+        <item>50</item>
+        <item>1000000</item>
+    </string-array>
+    <string-array name="book_line_length_texts">
+        <item>5 moves</item>
+        <item>10 moves</item>
+        <item>15 moves</item>
+        <item>20 moves</item>
+        <item>30 moves</item>
+        <item>50 moves</item>
+        <item>Unlimited</item>
+    </string-array>
+    <string name="about_info">\
+<b>About</b>\n\
+<i>DroidFish</i> is an Android port of the famous <i>stockfish 2.1.1</i> chess engine. \
+<i>Stockfish</i> is one of the strongest chess engines in the world. \
+The Android version can often search 15 ply or deeper on a 1GHz Snapdragon CPU.\n\
+\n\
+<b>Features</b>\n\
+* Opening book\n\
+* Unlimited undo/redo\n\
+* Copy/paste to/from clipboard\n\
+* Analysis mode\n\
+* Two player mode\n\
+* Computer vs computer mode\n\
+* Setup positions\n\
+* Extensive PGN support\n\
+* Adjustable playing strength\n\
+\n\
+<b>Hints</b>\n\
+* In game mode, long press chess board to activate copy/paste menu.\n\
+* In edit board mode, long press chess board to activate edit menu.\n\
+* Scroll left/right on the chess board to undo/redo moves.\n\
+* If the game contains multiple variations, scroll up/down on the chess board to \
+go to the previous/next variation.\n\
+* Long press left/right buttons for additional game navigation commands.\n\
+\n\
+<b>Opening books</b>\n\
+DroidFish contains a small internal opening book. If you want to use \
+a larger book, you can configure DroidFish to use external <i>polyglot</i> \
+or <i>CTG</i> book files:\n\
+1. Create a directory called <i>DroidFish</i> on the SD card.\n\
+2a. Copy one or more polyglot book files to the <i>DroidFish</i> directory. \
+Polyglot books must have the file extension .bin.\n\
+2b. Copy one more more CTG book files to the <i>DroidFish</i> directory. A CTG \
+book consists of three files with file extensions .ctg, .ctb and .cto. \
+You must copy all three files.\n\
+3. From the program menu, activate the <i>Select opening book</i> function.\n\
+4. Select the opening book file you want to use.\n\
+\n\
+<b>PGN files</b>\n\
+DroidFish can load games from PGN files. To use this feature:\n\
+1. Create a directory called <i>DroidFish/pgn</i> on the SD card.\n\
+2. Copy one or more PGN files to the <i>DroidFish/pgn</i> directory.\n\
+3. Long press the chess board and select <i>Load game from PGN file</i>.\n\
+4. Select the file, then the game within the file you want to load.\n\
+\n\
+To edit game headers such as player names, long press the move list and select \
+<i>Edit Headers</i>. To edit comments for a move, long press the move list and \
+select <i>Edit Comments</i>. To save your edited game, long press the chess board \
+and select <i>Save game to PGN file</i>.\n\
+\n\
+To add computer analysis to the game tree, long press the analysis information \
+when the computer is thinking and select <i>Add Analysis</i>. The current PV is \
+added as a variation in the game tree.\n\
+\n\
+In analysis mode, it is possible to add null moves to the game tree. Be aware though \
+that null moves are not included in the PGN standard and may not work in other PGN \
+reading chess programs.\n\
+\n\
+<b>Scid files</b>\n\
+If you have <i>Scid on the go</i> installed, you can read Scid database files \
+directly from DroidFish. Long press the chess board and select <i>Load game from \
+Scid file</i>.\n\
+\n\
+<b>License</b>\n\
+GNU GPL v3\n\
+\n\
+<b>Developers</b>\n\
+* <i>Stockfish</i> is developed by Tord Romstad, Marco Costalba and Joona Kiiski.\n\
+* <i>Droidfish</i> is developed by Peter Österlund.\n\
+* User interface improvements by Aaro Korhonen.\n\
+    </string>
+    <string name="cpu_warning">\
+<b>CPU Usage</b>\n\
+If you leave DroidFish running in the background and <i>GameMode</i> is set to \
+<i>Analysis</i> or <i>Computer vs Computer</i>, or if <i>Thinking Time</i> \
+is set to a large value, or if <i>Pondering</i> is enabled, DroidFish can use \
+a lot of CPU power.\n\
+\n\
+If you are running on battery power, it is recommended that you change settings to \
+conserve battery power, or that you exit <i>DroidFish</i> using the back button when \
+you are not actively using the program.\
+    </string>
+    <string name="offer_draw">Offer Draw</string>
+    <string name="queen">Queen</string>
+    <string name="rook">Rook</string>
+    <string name="bishop">Bishop</string>
+    <string name="knight">Knight</string>
+    <string name="promote_pawn_to">Promote pawn to?</string>
+    <string name="copy_game">Copy Game to Clipboard</string>
+    <string name="copy_position">Copy Position to Clipboard</string>
+    <string name="paste">Paste from Clipboard</string>
+    <string name="load_game">Load game from PGN file</string>
+    <string name="load_scid_game">Load game from Scid file</string>
+    <string name="save_game">Save game to PGN file</string>
+    <string name="truncate_gametree">Truncate Game Tree</string>
+    <string name="move_var_up">Move Variation Up</string>
+    <string name="move_var_down">Move Variation Down</string>
+    <string name="add_null_move">Add Null Move</string>
+    <string name="tools_menu">Tools</string>
+    <string name="load_save_menu">Load/Save Game</string>
+    <string name="goto_move">Goto move</string>
+    <string name="edit_strength">Edit Strength</string>
+    <string name="edit_randomization">Edit Randomization</string>
+    <string name="invalid_number_format">Invalid number format</string>
+    <string name="side_to_move">Side to Move</string>
+    <string name="clear_board">Clear Board</string>
+    <string name="initial_position">Initial Position</string>
+    <string name="castling_flags">Castling Flags</string>
+    <string name="en_passant_file">En Passant File</string>
+    <string name="move_counters">Move Counters</string>
+    <string name="paste_position">Paste Position</string>
+    <string name="edit_board">Edit Board</string>
+    <string name="select_side_to_move_first">Select side to move first</string>
+    <string name="white">White</string>
+    <string name="black">Black</string>
+    <string name="white_king_castle">White king castle</string>
+    <string name="white_queen_castle">White queen castle</string>
+    <string name="black_king_castle">Black king castle</string>
+    <string name="black_queen_castle">Black queen castle</string>
+    <string name="none">None</string>
+    <string name="select_en_passant_file">Select En Passant File</string>
+    <string name="edit_move_counters">Edit Move Counters</string>
+    <string name="internal_book">&lt;Internal Book&gt;</string>
+    <string name="select_opening_book_file">Select opening book file</string>
+    <string name="select_pgn_file">Select PGN file to open</string>
+    <string name="select_pgn_file_save">Save to PGN file</string>
+    <string name="select_scid_file">Select Scid file to open</string>
+    <string name="select_pgn_game">Select game to open</string>
+    <string name="reading_pgn_file">Reading PGN file</string>
+    <string name="reading_scid_file">Reading Scid file</string>
+    <string name="new_file">&lt;New File&gt;</string>
+    <string name="please_wait">Please wait&#8230;</string>
+    <string name="no_pgn_files">No files found in directory DroidFish/pgn on the SD card</string>
+    <string name="no_scid_files">No files found in directory scid on the SD card</string>
+    <string name="select_color_theme">Select Color Theme</string>
+    <string name="select_game_mode">Select Game Mode</string>
+    <string name="edit_replay_game">Edit/re-play Game</string>
+    <string name="analysis_mode">Analysis Mode</string>
+    <string name="play_white">Play White</string>
+    <string name="play_black">Play Black</string>
+    <string name="two_players">Two Players</string>
+    <string name="comp_vs_comp">Computer vs Computer</string>
+    <string name="analysis">Analysis</string>
+    <string name="edit_game">Edit Game</string>
+    <string name="edit_headers">Edit Headers</string>
+    <string name="edit_comments">Edit Comments</string>
+    <string name="go_back">Go Back</string>
+    <string name="go_forward">Go Forward</string>
+    <string name="goto_start_game">Goto Start of Game</string>
+    <string name="goto_start_variation">Goto Start of Variation</string>
+    <string name="goto_prev_variation">Goto Previous Variation</string>
+    <string name="load_prev_game">Load Previous Game</string>
+    <string name="goto_end_variation">Goto End of Variation</string>
+    <string name="goto_next_variation">Goto Next Variation</string>
+    <string name="load_next_game">Load Next Game</string>
+    <string name="no_prev_game">No previous game</string>
+    <string name="no_next_game">No next game</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="move_number">Move number:</string>
+    <string name="filename">Filename:</string>
+    <string name="halfmove">Halfmove clock:</string>
+    <string name="fullmove">Fullmove counter:</string>
+    <string name="filter_text">Filter text</string>
+    <string name="value_percent">Value (%):</string>
+    <string name="header_event">Event:</string>
+    <string name="header_site">Site:</string>
+    <string name="header_date">Date:</string>
+    <string name="header_round">Round:</string>
+    <string name="header_white">White:</string>
+    <string name="header_black">Black:</string>
+    <string name="comment_before">Before:</string>
+    <string name="comment_move">Move:</string>
+    <string name="comment_after">After:</string>
+    <string name="whites_move">White\'s move</string>
+    <string name="blacks_move">Black\'s move</string>
+    <string name="ponder">ponder</string>
+    <string name="thinking">thinking</string>
+    <string name="analyzing">analyzing</string>
+    <string name="white_mate">Game over, white mates!</string>
+    <string name="black_mate">Game over, black mates!</string>
+    <string name="stalemate">Game over, draw by stalemate!</string>
+    <string name="draw_rep">Game over, draw by repetition!</string>
+    <string name="draw_50">Game over, draw by 50 move rule!</string>
+    <string name="draw_no_mate">Game over, draw by impossibility of mate!</string>
+    <string name="draw_agree">Game over, draw by agreement!</string>
+    <string name="resign_white">Game over, white resigns!</string>
+    <string name="resign_black">Game over, black resigns!</string>
+    <string name="book">Book:</string>
+    <string name="invalid_move">Invalid move</string>
+    <string name="preferences">Preferences</string>
+    <string name="load_game_title">Edit File / Load Game</string>
+    <string name="save_game_title">Edit File / Save Game</string>
+    <string name="load_scid_game_title">Load Scid Game</string>
+    <string name="cpu_warning_title">CPU Warning</string>
+    <string name="failed_to_read_pgn_data">Failed to read pgn data</string>
+    <string name="variation">Var:</string>
+    <string name="add_analysis">Add Analysis</string>
+    <string name="fewer_variations">Fewer Variations</string>
+    <string name="more_variations">More Variations</string>
+    <string name="heavy_cpu_usage">Heavy CPU usage</string>
+    <string name="background_processing">Background processing</string>
+    <string name="lot_cpu_power">DroidFish is using a lot of CPU power</string>
+    <string name="delete_game">Delete game?</string>
+    <string name="delete_file">Delete file</string>
+    <string name="delete_file_question">Delete file?</string>
+    <string name="delete_named_file">Delete file %s?</string>
+    <string name="game_saved">Game saved</string>
+    <string name="failed_to_save_game">Failed to save game</string>
+    <string name="failed_to_delete_game">Failed to delete game</string>
+    <string name="file_too_large">File too large</string>
+    <string name="save_game_question">Save game?</string>
+    <string name="before_selected">Before Selected</string>
+    <string name="after_selected">After Selected</string>
+    <string name="replace_selected">Replace Selected</string>
+
+    <string name="err_too_few_spaces">Too few spaces</string>
+    <string name="err_invalid_piece">Invalid piece</string>
+    <string name="err_invalid_side">Invalid side</string>
+    <string name="err_invalid_castling_flags">Invalid castling flags</string>
+    <string name="err_invalid_en_passant_square">Invalid en passant square</string>
+    <string name="err_white_num_kings">White must have exactly one king</string>
+    <string name="err_black_num_kings">Black must have exactly one king</string>
+    <string name="err_king_capture_possible">King capture possible</string>
+    <string name="err_too_many_rows">Too many rows</string>
+    <string name="err_too_many_columns">Too many columns</string>
+    <string name="err_pawn_on_first_last_rank">Pawn on first/last rank</string>
+    <string name="err_too_many_white_pieces">Too many white pieces</string>
+    <string name="err_too_many_black_pieces">Too many black pieces</string>
+
+    <string name="option_new_game">New Game</string>
+    <string name="option_file">File</string>
+    <string name="option_resign_game">Resign game</string>
+    <string name="option_edit_board">Edit Board</string>
+    <string name="option_settings">Settings</string>
+    <string name="option_goto_move">Goto Move</string>
+    <string name="option_force_computer_move">Force Computer Move</string>
+    <string name="option_draw">Claim/Offer/Accept Draw</string>
+    <string name="option_select_book">Select Opening Book</string>
+    <string name="option_color_theme">Set Color Theme</string>
+    <string name="option_about">About / Help</string>
+
+    <string name="prefs_playing_options">Playing Options</string>
+    <string name="prefs_boardFlipped_title">Flip Board</string>
+    <string name="prefs_boardFlipped_summary">View board from black side</string>
+    <string name="prefs_autoSwapSides_title">Auto Swap Sides</string>
+    <string name="prefs_autoSwapSides_summary">Automatically swap sides when new game started. Also overrides Flip Board setting</string>
+    <string name="prefs_engine_settings">Engine Settings</string>
+    <string name="prefs_engine_title">Engine</string>
+    <string name="prefs_engine_summary">Chess Engine</string>
+    <string name="prefs_strength_title">Strength</string>
+    <string name="prefs_ponderMode_title">Pondering</string>
+    <string name="prefs_ponderMode_summary">Let engine think while waiting for opponent\'s move</string>
+    <string name="prefs_threads_title">Threads</string>
+    <string name="prefs_threads_summary">Number of engine threads (CPU cores) to use</string>
+    <string name="prefs_time_control">Time Control</string>
+    <string name="prefs_movesPerSession_title">Moves</string>
+    <string name="prefs_movesPerSession_summary">Number of moves between time controls</string>
+    <string name="prefs_timeControl_title">Time</string>
+    <string name="prefs_timeControl_summary">Maximum thinking time between time controls</string>
+    <string name="prefs_timeIncrement_title">Increment</string>
+    <string name="prefs_timeIncrement_summary">Extra thinking time for each completed move</string>
+    <string name="prefs_hints">Hints</string>
+    <string name="prefs_showThinking_title">Show Computer Thinking</string>
+    <string name="prefs_showThinking_summary">Display computer algorithm information during search</string>
+    <string name="prefs_whiteBasedScores_title">White-based scores</string>
+    <string name="prefs_whiteBasedScores_summary">Positive analysis scores are good for white</string>
+    <string name="prefs_bookHints_title">Show Book Hints</string>
+    <string name="prefs_bookHints_summary">Display opening book move hints for human player</string>
+    <string name="prefs_thinkingArrows_title">Use Arrows</string>
+    <string name="prefs_thinkingArrows_summary">Use arrows to display moves on chess board</string>
+    <string name="prefs_user_interface">User Interface</string>
+    <string name="prefs_animateMoves_title">Animate Moves</string>
+    <string name="prefs_animateMoves_summary">Animate piece movements</string>
+    <string name="prefs_oneTouchMoves_title">One Touch Moves</string>
+    <string name="prefs_oneTouchMoves_summary">Touching a square that corresponds to one unique move makes that move immediately</string>
+    <string name="prefs_soundEnabled_title">Enable Sounds</string>
+    <string name="prefs_soundEnabled_summary">Play sound when computer makes a move</string>
+    <string name="prefs_fullScreenMode_title">Fullscreen Mode</string>
+    <string name="prefs_fullScreenMode_summary">Fullscreen mode hides the status bar</string>
+    <string name="prefs_wakeLock_title">Disable Screen Timeout</string>
+    <string name="prefs_drawSquareLabels_title">Square Labels</string>
+    <string name="prefs_drawSquareLabels_summary">Display square labels: a-h and 1-8</string>
+    <string name="prefs_scrollSensitivity_title">Scrolling Speed</string>
+    <string name="prefs_scrollSensitivity_summary">Scrolling speed for game navigation</string>
+    <string name="prefs_invertScrollDirection_title">Invert Scroll Direction</string>
+    <string name="prefs_invertScrollDirection_summary">Enable this if you think scrolling moves in the wrong direction</string>
+    <string name="prefs_fontSize_title">Text Size</string>
+    <string name="prefs_fontSize_summary">Font size for move list and game information</string>
+    <string name="prefs_largeButtons_title">Large Buttons</string>
+    <string name="prefs_largeButtons_summary">Use large buttons for game navigation and mode setting</string>
+    <string name="prefs_colors_title">Color Settings</string>
+    <string name="prefs_colors_summary">Change individual colors</string>
+    <string name="prefs_chess_board">Chess Board</string>
+    <string name="prefs_color_brightSquare_title">Bright Squares</string>
+    <string name="prefs_color_darkSquare_title">Dark Squares</string>
+    <string name="prefs_color_selectedSquare_title">Selected Square</string>
+    <string name="prefs_color_cursorSquare_title">Trackball Cursor</string>
+    <string name="prefs_color_brightPiece_title">White Pieces</string>
+    <string name="prefs_color_darkPiece_title">Black Pieces</string>
+    <string name="prefs_color_arrow0_title">Arrow 1</string>
+    <string name="prefs_color_arrow1_title">Arrow 2</string>
+    <string name="prefs_color_arrow2_title">Arrow 3</string>
+    <string name="prefs_color_arrow3_title">Arrow 4</string>
+    <string name="prefs_color_arrow4_title">Arrow 5</string>
+    <string name="prefs_color_arrow5_title">Arrow 6</string>
+    <string name="prefs_color_squareLabel_title">Square Labels</string>
+    <string name="prefs_move_list">Move List</string>
+    <string name="prefs_color_currentMove_title">Current Move</string>
+    <string name="prefs_other">Other</string>
+    <string name="prefs_bookSettings_title">Opening Book Settings</string>
+    <string name="prefs_bookSettings_summary">Settings for opening book usage</string>
+    <string name="prefs_bookMaxLength_title">Book Length</string>
+    <string name="prefs_bookMaxLength_summary">Maximum book line length</string>
+    <string name="prefs_bookPreferMainLines_title">Prefer main lines</string>
+    <string name="prefs_bookPreferMainLines_summary">Prefer book moves marked as main moves</string>
+    <string name="prefs_bookTournamentMode_title">Tournament mode</string>
+    <string name="prefs_bookTournamentMode_summary">Ignore moves marked as not for tournament play</string>
+    <string name="prefs_bookRandom_title">Book Randomization</string>
+    <string name="prefs_bookFile_title">Book Filename</string>
+    <string name="prefs_bookFile_summary">Polyglot or CTG book file in DroidFish directory on SD Card</string>
+    <string name="prefs_pgnSettings_title">PGN Settings</string>
+    <string name="prefs_pgnSettings_summary">Settings for import and export of portable game notation (PGN) data</string>
+    <string name="prefs_pgn_viewer">PGN viewer</string>
+    <string name="prefs_viewVariations_title">Variations</string>
+    <string name="prefs_viewVariations_summary">Include non-mainline moves</string>
+    <string name="prefs_viewComments_title">Comments</string>
+    <string name="prefs_viewComments_summary">Include user written comments</string>
+    <string name="prefs_viewNAG_title">Annotations</string>
+    <string name="prefs_viewNAG_summary">Include numeric annotation glyphs (NAGs), such as ! and ?</string>
+    <string name="prefs_viewHeaders_title">Headers</string>
+    <string name="prefs_viewHeaders_summary">Show PGN header lines</string>
+    <string name="prefs_pgn_import">PGN import</string>
+    <string name="prefs_importVariations_title">Variations</string>
+    <string name="prefs_importVariations_summary">Include non-mainline moves</string>
+    <string name="prefs_importComments_title">Comments</string>
+    <string name="prefs_importComments_summary">Include user written comments</string>
+    <string name="prefs_importNAG_title">Annotations</string>
+    <string name="prefs_importNAG_summary">Include numeric annotation glyphs (NAGs), such as ! and ?</string>
+    <string name="prefs_pgn_export">PGN export</string>
+    <string name="prefs_exportVariations_title">Variations</string>
+    <string name="prefs_exportVariations_summary">Include non-mainline moves</string>
+    <string name="prefs_exportComments_title">Comments</string>
+    <string name="prefs_exportComments_summary">Include user written comments</string>
+    <string name="prefs_exportNAG_title">Annotations</string>
+    <string name="prefs_exportNAG_summary">Include numeric annotation glyphs (NAGs), such as ! and ?</string>
+    <string name="prefs_exportPlayerAction_title">Player Actions</string>
+    <string name="prefs_exportPlayerAction_summary">Include information about draw and resign actions</string>
+    <string name="prefs_exportTime_title">Clock</string>
+    <string name="prefs_exportTime_summary">Include time information for each move</string>
+</resources>
