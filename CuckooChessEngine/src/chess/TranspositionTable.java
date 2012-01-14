@@ -307,7 +307,7 @@ public class TranspositionTable {
         int unused = 0;
         int thisGen = 0;
         List<Integer> depHist = new ArrayList<Integer>();
-        final int maxDepth = 20*8;
+        final int maxDepth = 20;
         for (int i = 0; i < maxDepth; i++) {
             depHist.add(0);
         }
@@ -323,13 +323,9 @@ public class TranspositionTable {
                 }
             }
         }
-        double w = 100.0 / table.length;
-        System.out.printf("Hash stats: size:%d unused:%d (%.2f%%) thisGen:%d (%.2f%%)\n",
-                          table.length, unused, unused*w, thisGen, thisGen*w);
+        System.out.printf("Hash stats: unused:%d thisGen:%d\n", unused, thisGen);
         for (int i = 0; i < maxDepth; i++) {
-            int c = depHist.get(i);
-            if (c > 0)
-                System.out.printf("%3d %8d (%6.2f%%)\n", i, c, c*w);
+            System.out.printf("%2d %d\n", i, depHist.get(i));
         }
     }
     

@@ -1,14 +1,14 @@
 10
 
 dir
-839
-http://cuckoochess.googlecode.com/svn/trunk/CuckooChessEngine/src
-http://cuckoochess.googlecode.com/svn
+758
+file:///home/petero/git/svnrepo/CuckooChessEngine/src
+file:///home/petero/git/svnrepo
 
 
 
-2012-01-07T22:06:57.746612Z
-826
+2011-10-24T16:48:26.085715Z
+758
 petero
 
 
@@ -24,7 +24,7 @@ petero
 
 
 
-738e98cc-9000-e54f-6aee-11b01496cf95
+4bee22b1-9b17-40b4-a65d-17bc684ee73d
 
 guibase
 dir
@@ -35,10 +35,10 @@ file
 
 
 
-2012-01-14T21:54:26.591176Z
-7ffc80e4ae69b11295a546ee440ddaf1
-2011-11-09T18:54:43.913394Z
-695
+2011-10-16T14:24:56.000000Z
+88e38263e3a860355698559e27785202
+2011-10-20T04:36:37.046477Z
+749
 petero
 has-props
 
@@ -61,7 +61,7 @@ has-props
 
 
 
-5762
+5698
 
 krkp.winmasks
 file
@@ -69,10 +69,10 @@ file
 
 
 
-2012-01-14T21:54:26.595176Z
+2011-10-09T18:10:06.000000Z
 a2653058af3791718523fcd246bfb21a
 2011-10-11T22:20:16.587736Z
-678
+741
 petero
 has-props
 
@@ -106,10 +106,10 @@ file
 
 
 
-2012-01-14T21:54:26.595176Z
-082498202920f91f0ed5fa4d33151fbb
-2011-11-09T18:54:43.913394Z
-695
+2011-10-16T14:24:53.000000Z
+ca525ce6d37dcdacc2e046609763ac84
+2011-10-20T04:36:37.046477Z
+749
 petero
 
 
@@ -132,7 +132,7 @@ petero
 
 
 
-10756
+10646
 
 kpk.bitbase
 file
@@ -140,10 +140,10 @@ file
 
 
 
-2012-01-14T21:54:26.595176Z
+2011-06-24T08:47:59.000000Z
 1a3249cf0ae4031598ce32182bcdc0fb
 2010-12-11T23:37:50.767587Z
-464
+516
 petero
 has-props
 

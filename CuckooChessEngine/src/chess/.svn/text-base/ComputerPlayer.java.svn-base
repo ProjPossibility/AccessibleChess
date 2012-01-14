@@ -27,17 +27,7 @@ import java.util.Random;
  * @author petero
  */
 public class ComputerPlayer implements Player {
-    public static final String engineName;
-
-    static {
-        String name = "CuckooChess 1.13a8";
-        String m = System.getProperty("sun.arch.data.model");
-        if ("32".equals(m))
-            name += " 32-bit";
-        else if ("64".equals(m))
-            name += " 64-bit";
-        engineName = name;
-    }
+    public static String engineName = "CuckooChess 1.12";
 
     int minTimeMillis;
     int maxTimeMillis;

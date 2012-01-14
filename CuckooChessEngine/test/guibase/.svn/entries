@@ -1,14 +1,14 @@
 10
 
 dir
-839
-http://cuckoochess.googlecode.com/svn/trunk/CuckooChessEngine/test/guibase
-http://cuckoochess.googlecode.com/svn
+758
+file:///home/petero/git/svnrepo/CuckooChessEngine/test/guibase
+file:///home/petero/git/svnrepo
 
 
 
 2011-04-13T17:54:38.290600Z
-577
+633
 petero
 
 
@@ -24,7 +24,7 @@ petero
 
 
 
-738e98cc-9000-e54f-6aee-11b01496cf95
+4bee22b1-9b17-40b4-a65d-17bc684ee73d
 
 ChessControllerTest.java
 file
@@ -32,10 +32,10 @@ file
 
 
 
-2012-01-14T21:54:20.951177Z
+2011-06-24T08:47:59.000000Z
 475e01b80a5cd2f14b6eb30c0a9f973b
 2011-04-13T17:54:38.290600Z
-577
+633
 petero
 
 

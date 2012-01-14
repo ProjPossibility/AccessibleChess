@@ -1,14 +1,14 @@
 10
 
 dir
-839
-http://cuckoochess.googlecode.com/svn/trunk/CuckooChessEngine
-http://cuckoochess.googlecode.com/svn
+758
+file:///home/petero/git/svnrepo/CuckooChessEngine
+file:///home/petero/git/svnrepo
 
 
 
-2012-01-07T22:06:57.746612Z
-826
+2011-10-24T16:48:26.085715Z
+758
 petero
 
 
@@ -24,7 +24,7 @@ petero
 
 
 
-738e98cc-9000-e54f-6aee-11b01496cf95
+4bee22b1-9b17-40b4-a65d-17bc684ee73d
 
 test
 dir
@@ -35,10 +35,10 @@ file
 
 
 
-2012-01-14T21:54:26.603176Z
+2011-06-24T08:47:59.000000Z
 8f59602c70aaeda1f83a4507af133119
 2010-05-09T16:26:35.882708Z
-12
+31
 petero
 
 
@@ -69,10 +69,10 @@ file
 
 
 
-2012-01-14T21:54:26.603176Z
+2011-06-24T08:47:59.000000Z
 4bd68e3c60b94f8f42bedf7961e6760b
 2010-07-02T07:52:12.440767Z
-145
+165
 petero
 
 

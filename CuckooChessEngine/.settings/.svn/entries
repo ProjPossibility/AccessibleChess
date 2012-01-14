@@ -1,14 +1,14 @@
 10
 
 dir
-839
-http://cuckoochess.googlecode.com/svn/trunk/CuckooChessEngine/.settings
-http://cuckoochess.googlecode.com/svn
+758
+file:///home/petero/git/svnrepo/CuckooChessEngine/.settings
+file:///home/petero/git/svnrepo
 
 
 
 2010-05-09T16:26:35.882708Z
-12
+31
 petero
 
 
@@ -24,7 +24,7 @@ petero
 
 
 
-738e98cc-9000-e54f-6aee-11b01496cf95
+4bee22b1-9b17-40b4-a65d-17bc684ee73d
 
 org.eclipse.jdt.core.prefs
 file
@@ -32,10 +32,10 @@ file
 
 
 
-2012-01-14T21:54:26.599176Z
+2011-06-24T08:47:59.000000Z
 46b3ad8ab0e4a91e86ba60f62f73dd29
 2010-05-09T16:26:35.882708Z
-12
+31
 petero
 
 
