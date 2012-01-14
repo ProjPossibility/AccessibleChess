@@ -1,14 +1,14 @@
 10
 
 dir
-758
-file:///home/petero/git/svnrepo/CuckooChessEngine/src/guibase
-file:///home/petero/git/svnrepo
+839
+http://cuckoochess.googlecode.com/svn/trunk/CuckooChessEngine/src/guibase
+http://cuckoochess.googlecode.com/svn
 
 
 
-2011-06-05T13:59:25.104780Z
-665
+2011-11-26T13:50:15.641209Z
+724
 petero
 
 
@@ -24,7 +24,7 @@ petero
 
 
 
-4bee22b1-9b17-40b4-a65d-17bc684ee73d
+738e98cc-9000-e54f-6aee-11b01496cf95
 
 GUIInterface.java
 file
@@ -32,10 +32,10 @@ file
 
 
 
-2011-06-24T08:47:59.000000Z
+2012-01-14T21:54:22.735176Z
 a24aeec8b7a3e82b39a8b6cab2dd427b
 2011-04-13T17:54:38.290600Z
-633
+577
 petero
 
 
@@ -66,10 +66,10 @@ file
 
 
 
-2011-06-24T08:47:59.000000Z
-7f22f547cca4fe5b671c60c5a303558e
-2011-06-05T13:59:25.104780Z
-665
+2012-01-14T21:54:22.735176Z
+c9144176dba3fc98b6b2cdd015174a6e
+2011-11-26T13:50:15.641209Z
+724
 petero
 
 
@@ -92,5 +92,5 @@ petero
 
 
 
-18073
+18076
 

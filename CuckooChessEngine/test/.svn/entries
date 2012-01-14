@@ -1,14 +1,14 @@
 10
 
 dir
-758
-file:///home/petero/git/svnrepo/CuckooChessEngine/test
-file:///home/petero/git/svnrepo
+839
+http://cuckoochess.googlecode.com/svn/trunk/CuckooChessEngine/test
+http://cuckoochess.googlecode.com/svn
 
 
 
-2011-10-11T22:20:16.587736Z
-741
+2011-12-04T17:32:22.924284Z
+738
 petero
 
 
@@ -24,7 +24,7 @@ petero
 
 
 
-4bee22b1-9b17-40b4-a65d-17bc684ee73d
+738e98cc-9000-e54f-6aee-11b01496cf95
 
 guibase
 dir
