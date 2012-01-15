@@ -356,7 +356,7 @@ public class TextIO {
             	// TODO!!!
                 ret.append((char)(x1 + 'a'));
                 ret.append((char) (y1 + '1'));
-                ret.append(isCapture(pos, move) ? " captures " : " to ");
+                ret.append(" to ");
             	// TODO
             	break;
             }

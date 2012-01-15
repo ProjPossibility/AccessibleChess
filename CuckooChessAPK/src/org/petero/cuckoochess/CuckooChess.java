@@ -225,7 +225,7 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
                     	
                     			char sqX = (char) (pos.getX(sq) + 'a');
                             	char sqY = (char) (pos.getY(sq) + '1');
-                            	 StringBuffer loca = new StringBuffer();
+                            	StringBuffer loca = new StringBuffer();
                             	loca.append(sqX);
                             	loca.append(sqY);
 

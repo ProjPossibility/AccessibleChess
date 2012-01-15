@@ -534,15 +534,16 @@ public class ChessController {
 
     final private void setStatusString() { //TODO
         String str = game.pos.whiteMove ? "White's move" : "Black's move";
+        Position posi = new Position(game.pos);
         if (computerThread != null) str += " (thinking)";
         if (game.getGameState() != Game.GameState.ALIVE) {
             str = game.getGameStateString();
-        	tts.speak(TextIO.moveToString(game.pos, game.getLastMove(), readableForm.TEXT), TextToSpeech.QUEUE_FLUSH, null);
+        	tts.speak(TextIO.moveToString(posi, game.getLastMove(), readableForm.TEXT), TextToSpeech.QUEUE_FLUSH, null);
         	//tts.speak("trees", TextToSpeech.QUEUE_FLUSH, null);
 
         }
-        if (tts != null)
-        	tts.speak(TextIO.moveToString(game.pos, game.getLastMove(), readableForm.TEXT), TextToSpeech.QUEUE_FLUSH, null);
+        if (tts != null && game.pos.whiteMove)
+        	tts.speak(TextIO.moveToString(posi, game.getLastMove(), readableForm.TEXT), TextToSpeech.QUEUE_FLUSH, null);
 
     	//tts.speak(TextIO.moveToString(game.pos, game.getLastMove(), readableForm.TEXT), TextToSpeech.QUEUE_FLUSH, null);
         gui.setStatusString(str);
