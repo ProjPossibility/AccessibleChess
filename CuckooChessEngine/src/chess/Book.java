@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import chess.TextIO.readableForm;
+
 /**
  * Implements an opening book.
  * @author petero
@@ -176,7 +178,7 @@ public class Book {
         List<BookEntry> bookMoves = bookMap.get(pos.zobristHash());
         if (bookMoves != null) {
             for (BookEntry be : bookMoves) {
-                String moveStr = TextIO.moveToString(pos, be.move, false);
+                String moveStr = TextIO.moveToString(pos, be.move, readableForm.SHORT);
                 ret.append(moveStr);
                 ret.append("(");
                 ret.append(be.count);

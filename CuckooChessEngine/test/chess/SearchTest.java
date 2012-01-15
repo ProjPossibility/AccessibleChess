@@ -19,6 +19,7 @@
 package chess;
 
 import chess.Search.StopSearch;
+import chess.TextIO.readableForm;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -89,7 +90,7 @@ public class SearchTest {
         pos = TextIO.readFEN("8/8/2K5/3QP3/P6P/1q6/8/k7 w - - 31 51");
         sc = new Search(pos, nullHist, 0, tt);
         Move bestM = idSearch(sc, 2);
-        assertTrue(!TextIO.moveToString(pos, bestM, false).equals("Qxb3"));
+        assertTrue(!TextIO.moveToString(pos, bestM, readableForm.SHORT).equals("Qxb3"));
     }
 
     /**

@@ -23,6 +23,10 @@ package chess;
  * @author petero
  */
 public class TextIO {
+	
+	public static enum readableForm {
+		SHORT, LONG, TEXT
+	}
     static public final String startPosFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
     /** Parse a FEN string and return a chess Position object. */
@@ -273,42 +277,46 @@ public class TextIO {
      * @param longForm If true, use long notation, eg Ng1-f3.
      *                 Otherwise, use short notation, eg Nf3
      */
-    public static final String moveToString(Position pos, Move move, boolean longForm) {
+    public static final String moveToString(Position pos, Move move, readableForm form) {
         MoveGen.MoveList moves = MoveGen.instance.pseudoLegalMoves(pos);
         MoveGen.removeIllegal(pos, moves);
-        return moveToString(pos, move, longForm, moves);
+        return moveToString(pos, move, form, moves);
     }
-    private static final String moveToString(Position pos, Move move, boolean longForm, MoveGen.MoveList moves) {
+    private static final String moveToString(Position pos, Move move, readableForm form, MoveGen.MoveList moves) {
         StringBuilder ret = new StringBuilder();
         int wKingOrigPos = Position.getSquare(4, 0);
         int bKingOrigPos = Position.getSquare(4, 7);
+        String kingside = "Kingside castle";
+        String queenside = "Queenside castle";
         if (move.from == wKingOrigPos && pos.getPiece(wKingOrigPos) == Piece.WKING) {
             // Check white castle
             if (move.to == Position.getSquare(6, 0)) {
-                    ret.append("O-O");
+                ret.append(form == readableForm.TEXT ? "White " + kingside : "O-O");
             } else if (move.to == Position.getSquare(2, 0)) {
-                ret.append("O-O-O");
+            	ret.append(form == readableForm.TEXT ? "White " + queenside : "O-O-O");
             }
         } else if (move.from == bKingOrigPos && pos.getPiece(bKingOrigPos) == Piece.BKING) {
             // Check white castle
             if (move.to == Position.getSquare(6, 7)) {
-                ret.append("O-O");
+            	ret.append(form == readableForm.TEXT ? "Black " + kingside : "O-O");
             } else if (move.to == Position.getSquare(2, 7)) {
-                ret.append("O-O-O");
+            	ret.append(form == readableForm.TEXT ? "Black " + queenside : "O-O-O");
             }
         }
         if (ret.length() == 0) {
             int p = pos.getPiece(move.from);
-            ret.append(pieceToChar(p));
+            ret.append(form == readableForm.TEXT ? pieceToName(p) + " " : pieceToChar(p));
             int x1 = Position.getX(move.from);
             int y1 = Position.getY(move.from);
             int x2 = Position.getX(move.to);
             int y2 = Position.getY(move.to);
-            if (longForm) {
+            switch (form) {
+            case LONG:
                 ret.append((char)(x1 + 'a'));
                 ret.append((char) (y1 + '1'));
                 ret.append(isCapture(pos, move) ? 'x' : '-');
-            } else {
+                break;
+            case SHORT:
                 if (p == (pos.whiteMove ? Piece.WPAWN : Piece.BPAWN)) {
                     if (isCapture(pos, move)) {
                         ret.append((char) (x1 + 'a'));
@@ -343,11 +351,19 @@ public class TextIO {
                 if (isCapture(pos, move)) {
                     ret.append('x');
                 }
+                break;
+            case TEXT:
+            	// TODO!!!
+                ret.append((char)(x1 + 'a'));
+                ret.append((char) (y1 + '1'));
+                ret.append(isCapture(pos, move) ? " captures " : " to ");
+            	// TODO
+            	break;
             }
             ret.append((char) (x2 + 'a'));
             ret.append((char) (y2 + '1'));
             if (move.promoteTo != Piece.EMPTY) {
-                ret.append(pieceToChar(move.promoteTo));
+                ret.append(form == readableForm.TEXT ? pieceToName(move.promoteTo) : pieceToChar(move.promoteTo));
             }
         }
         UndoInfo ui = new UndoInfo();
@@ -356,13 +372,13 @@ public class TextIO {
             MoveGen.MoveList nextMoves = MoveGen.instance.pseudoLegalMoves(pos);
             MoveGen.removeIllegal(pos, nextMoves);
             if (nextMoves.size == 0) {
-                ret.append('#');
+                ret.append(form == readableForm.TEXT ? " Checkmate " : '#');
             } else {
-                ret.append('+');
+                ret.append(form == readableForm.TEXT ? " Check " : '+');
             }
             pos.unMakeMove(move, ui);
         }
-
+        // TODO en passant??
         return ret.toString();
     }
 
@@ -474,7 +490,7 @@ public class TextIO {
                 int len = 0;
                 for (int mi = 0; mi < moves.size; mi++) {
                     Move m = moves.m[mi];
-                    String str1 = TextIO.moveToString(pos, m, true, moves);
+                    String str1 = TextIO.moveToString(pos, m, readableForm.LONG, moves);
                     if (str1.charAt(str1.length() - 1) == lastChar) {
                         subMoves.m[len++] = m;
                     }
@@ -489,8 +505,8 @@ public class TextIO {
             // Search for full match
             for (int mi = 0; mi < moves.size; mi++) {
                 Move m = moves.m[mi];
-                String str1 = normalizeMoveString(TextIO.moveToString(pos, m, true, moves));
-                String str2 = normalizeMoveString(TextIO.moveToString(pos, m, false, moves));
+                String str1 = normalizeMoveString(TextIO.moveToString(pos, m, readableForm.LONG, moves));
+                String str2 = normalizeMoveString(TextIO.moveToString(pos, m, readableForm.SHORT, moves));
                 if (i == 0) {
                     if (strMove.equals(str1) || strMove.equals(str2)) {
                         return m;
@@ -508,8 +524,8 @@ public class TextIO {
             // Search for unique substring match
             for (int mi = 0; mi < moves.size; mi++) {
                 Move m = moves.m[mi];
-                String str1 = normalizeMoveString(TextIO.moveToString(pos, m, true));
-                String str2 = normalizeMoveString(TextIO.moveToString(pos, m, false));
+                String str1 = normalizeMoveString(TextIO.moveToString(pos, m, readableForm.LONG));
+                String str2 = normalizeMoveString(TextIO.moveToString(pos, m, readableForm.SHORT));
                 boolean match;
                 if (i == 0) {
                     match = (str1.startsWith(strMove) || str2.startsWith(strMove));
@@ -608,5 +624,23 @@ public class TextIO {
             case Piece.WKING:   case Piece.BKING:   return "K";
         }
         return "";
+    }
+    
+    private final static String pieceToName(int p) {
+        switch (p) {
+        case Piece.WPAWN:   return "White Pawn";
+        case Piece.BPAWN:   return "Black Pawn";
+        case Piece.WQUEEN:  return "White Queen";
+        case Piece.BQUEEN:  return "Black Queen";
+        case Piece.WROOK:   return "White Rook";
+        case Piece.BROOK:   return "Black Rook";
+        case Piece.WBISHOP: return "White Bishop";
+        case Piece.BBISHOP: return "Black Bishop";
+        case Piece.WKNIGHT: return "White Knight";
+        case Piece.BKNIGHT: return "Black Knight";
+        case Piece.WKING:   return "White King";
+        case Piece.BKING:   return "Black King";
+    }
+    return "";
     }
 }

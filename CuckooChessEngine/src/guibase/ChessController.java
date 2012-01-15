@@ -29,6 +29,7 @@ import chess.Player;
 import chess.Position;
 import chess.Search;
 import chess.TextIO;
+import chess.TextIO.readableForm;
 import chess.UndoInfo;
 import chess.Game.GameState;
 
@@ -101,7 +102,7 @@ public class ChessController {
         }
 
         public void notifyCurrMove(Move m, int moveNr) {
-            currMove = TextIO.moveToString(new Position(game.pos), m, false);
+            currMove = TextIO.moveToString(new Position(game.pos), m, readableForm.SHORT);
             currMoveNr = moveNr;
             setSearchInfo();
         }
@@ -121,7 +122,7 @@ public class ChessController {
             Position pos = new Position(game.pos);
             UndoInfo ui = new UndoInfo();
             for (Move m : pv) {
-                buf.append(String.format(" %s", TextIO.moveToString(pos, m, false)));
+                buf.append(String.format(" %s", TextIO.moveToString(pos, m, readableForm.SHORT)));
                 pos.makeMove(m, ui);
             }
             pvStr = buf.toString();
@@ -449,7 +450,7 @@ public class ChessController {
                     return false;
                 }
                 if (m.promoteTo == promoteTo) {
-                    String strMove = TextIO.moveToString(pos, m, false);
+                    String strMove = TextIO.moveToString(pos, m, readableForm.SHORT);
                     game.processString(strMove);
                     return true;
                 }

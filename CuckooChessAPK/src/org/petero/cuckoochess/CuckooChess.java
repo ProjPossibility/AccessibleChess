@@ -20,6 +20,7 @@ package org.petero.cuckoochess;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import guibase.ChessController;
 import guibase.GUIInterface;
@@ -34,6 +35,7 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.speech.tts.TextToSpeech;
 import android.text.ClipboardManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -49,9 +51,10 @@ import chess.Move;
 import chess.Position;
 import chess.TextIO;
 
-public class CuckooChess extends Activity implements GUIInterface {
+public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.OnInitListener {
     ChessBoard cb;
     ChessController ctrl;
+    private TextToSpeech tts;
     boolean mShowThinking;
     int mTimeLimit;
     boolean playerWhite;
@@ -83,6 +86,9 @@ public class CuckooChess extends Activity implements GUIInterface {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent checkIntent = new Intent();
+        checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
+        startActivityForResult(checkIntent, 1);
 
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         settings.registerOnSharedPreferenceChangeListener(new OnSharedPreferenceChangeListener() {
@@ -200,6 +206,7 @@ public class CuckooChess extends Activity implements GUIInterface {
     @Override
     protected void onDestroy() {
         ctrl.stopComputerThinking();
+        tts.shutdown();
         super.onDestroy();
     }
 
@@ -237,6 +244,19 @@ public class CuckooChess extends Activity implements GUIInterface {
         if (requestCode == 0) {
             readPrefs();
             ctrl.setHumanWhite(playerWhite);
+        }
+        //TODO
+        if (requestCode == 1) {
+            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
+                // success, create the TTS instance
+                tts = new TextToSpeech(this, this);
+            } else {
+                // missing data, install it
+                Intent installIntent = new Intent();
+                installIntent.setAction(
+                    TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
+                startActivity(installIntent);
+            }
         }
     }
 
@@ -362,5 +382,13 @@ public class CuckooChess extends Activity implements GUIInterface {
     @Override
     public void runOnUIThread(Runnable runnable) {
         runOnUiThread(runnable);
+    }
+
+    @Override
+    public void onInit(int status) {
+        tts.setLanguage(Locale.US); // Hard coded to US english
+        String hello = "Hello world!";
+        tts.speak(hello, TextToSpeech.QUEUE_ADD, null);
+        tts.speak("White Pawn e3 to e4 Black Pawn e7 to e5", TextToSpeech.QUEUE_ADD, null);
     }
 }

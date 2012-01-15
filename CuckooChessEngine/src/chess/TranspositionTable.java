@@ -21,6 +21,8 @@ package chess;
 import java.util.ArrayList;
 import java.util.List;
 
+import chess.TextIO.readableForm;
+
 /**
  *
  * @author petero
@@ -283,7 +285,7 @@ public class TranspositionTable {
                 }
             if  (!contains)
                 break;
-            String moveStr = TextIO.moveToString(pos, m, false);
+            String moveStr = TextIO.moveToString(pos, m, readableForm.SHORT);
             if (repetition)
                 break;
             if (!first) {
