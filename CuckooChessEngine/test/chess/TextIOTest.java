@@ -23,6 +23,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import chess.TextIO.readableForm;
 import static org.junit.Assert.*;
 
 /**
@@ -137,7 +139,7 @@ public class TextIOTest {
         assertEquals(TextIO.startPosFEN, TextIO.toFEN(pos));
         Move move = new Move(Position.getSquare(4, 1), Position.getSquare(4, 3),
                 Piece.EMPTY);
-        boolean longForm = true;
+        readableForm longForm = readableForm.LONG;
         String result = TextIO.moveToString(pos, move, longForm);
         assertEquals("e2-e4", result);
 
@@ -173,7 +175,7 @@ public class TextIOTest {
     public void testMoveToStringMate() throws ChessParseError {
         System.out.println("moveToStringMate");
         Position pos = TextIO.readFEN("3k4/1PR5/3N4/8/4K3/8/8/8 w - - 0 1");
-        boolean longForm = true;
+        readableForm longForm = readableForm.LONG;
 
         Move move = new Move(Position.getSquare(1, 6), Position.getSquare(1, 7), Piece.WROOK);
         String result = TextIO.moveToString(pos, move, longForm);
@@ -201,7 +203,7 @@ public class TextIOTest {
         String fen = "r4rk1/2pn3p/2q1q1n1/8/2q2p2/6R1/p4PPP/1R4K1 b - - 0 1";
         Position pos = TextIO.readFEN(fen);
         assertEquals(fen, TextIO.toFEN(pos));
-        boolean longForm = false;
+        readableForm longForm = readableForm.SHORT;
         
         Move move = new Move(Position.getSquare(4,5), Position.getSquare(4,3), Piece.EMPTY);
         String result = TextIO.moveToString(pos, move, longForm);

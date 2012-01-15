@@ -30,6 +30,7 @@ import chess.Position;
 import chess.SmsPlayer;
 import chess.Search;
 import chess.TextIO;
+import chess.TextIO.readableForm;
 import chess.UndoInfo;
 import chess.Game.GameState;
 
@@ -103,7 +104,7 @@ public class ChessController {
         }
 
         public void notifyCurrMove(Move m, int moveNr) {
-            currMove = TextIO.moveToString(new Position(game.pos), m, false);
+            currMove = TextIO.moveToString(new Position(game.pos), m, readableForm.SHORT);
             currMoveNr = moveNr;
             setSearchInfo();
         }
@@ -123,7 +124,7 @@ public class ChessController {
             Position pos = new Position(game.pos);
             UndoInfo ui = new UndoInfo();
             for (Move m : pv) {
-                buf.append(String.format(" %s", TextIO.moveToString(pos, m, false)));
+                buf.append(String.format(" %s", TextIO.moveToString(pos, m, readableForm.SHORT)));
                 pos.makeMove(m, ui);
             }
             pvStr = buf.toString();
@@ -425,17 +426,25 @@ public class ChessController {
     	return overSms && twoPlayer;
     }
 
+<<<<<<< HEAD
     public final void humanMove(Move m) {
         if (humansTurn() || smsTurn()) {
+=======
+    public final boolean humanMove(Move m) {
+        if (humansTurn()) {
+>>>>>>> master
             if (doMove(m)) {
                 updateGUI();
                 if(!twoPlayer) {
                 startComputerThinking();
                 }
+                return true;
             } else {
                 gui.setSelection(-1);
+                return false;
             }
         }
+        return false;
     }
 
     Move promoteMove;
@@ -466,7 +475,7 @@ public class ChessController {
      * Move a piece from one square to another.
      * @return True if the move was legal, false otherwise.
      */
-    final private boolean doMove(Move move) {
+    final public boolean doMove(Move move) {
         Position pos = game.pos;
         MoveGen.MoveList moves = new MoveGen().pseudoLegalMoves(pos);
         MoveGen.removeIllegal(pos, moves);
@@ -482,13 +491,32 @@ public class ChessController {
                     return false;
                 }
                 if (m.promoteTo == promoteTo) {
-                    String strMove = TextIO.moveToString(pos, m, false);
+                    String strMove = TextIO.moveToString(pos, m, readableForm.SHORT);
                     game.processString(strMove);
                     return true;
                 }
             }
         }
         gui.reportInvalidMove(move);
+        return false;
+    }
+    
+    final public boolean chkMove(Move move) {
+        Position pos = game.pos;
+        MoveGen.MoveList moves = new MoveGen().pseudoLegalMoves(pos);
+        MoveGen.removeIllegal(pos, moves);
+        int promoteTo = move.promoteTo;
+        for (int mi = 0; mi < moves.size; mi++) {
+            Move m = moves.m[mi];
+            if ((m.from == move.from) && (m.to == move.to)) {
+                if ((m.promoteTo != Piece.EMPTY) && (promoteTo == Piece.EMPTY)) {
+                    return false;
+                }
+                if (m.promoteTo == promoteTo) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 

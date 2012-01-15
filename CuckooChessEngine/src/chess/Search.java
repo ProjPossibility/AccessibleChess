@@ -18,6 +18,7 @@
 
 package chess;
 
+import chess.TextIO.readableForm;
 import chess.TranspositionTable.TTEntry;
 
 import java.util.ArrayList;
@@ -271,7 +272,7 @@ public class Search {
                             needMoreTime = true;
                         bestMove = m;
                         if (verbose)
-                            System.out.printf("%-6s %6d %6d %6d >=\n", TextIO.moveToString(pos, m, false),
+                            System.out.printf("%-6s %6d %6d %6d >=\n", TextIO.moveToString(pos, m, readableForm.SHORT),
                                     score, nodes, qNodes);
                         notifyPV(depth, score, false, true, m);
                         nodes = qNodes = 0;
@@ -290,7 +291,7 @@ public class Search {
                         retryDelta = Search.MATE0 * 2;
                         needMoreTime = searchNeedMoreTime = true;
                         if (verbose)
-                            System.out.printf("%-6s %6d %6d %6d <=\n", TextIO.moveToString(pos, m, false),
+                            System.out.printf("%-6s %6d %6d %6d <=\n", TextIO.moveToString(pos, m, readableForm.SHORT),
                                     score, nodes, qNodes);
                         notifyPV(depth, score, true, false, m);
                         nodes = qNodes = 0;
@@ -308,7 +309,7 @@ public class Search {
                     if ((score > alpha) || (mi == 0)) {
                         havePV = true;
                         if (verbose) {
-                            PV = TextIO.moveToString(pos, m, false) + " ";
+                            PV = TextIO.moveToString(pos, m, readableForm.SHORT) + " ";
                             pos.makeMove(m, ui);
                             PV += tt.extractPV(pos);
                             pos.unMakeMove(m, ui);
@@ -319,7 +320,7 @@ public class Search {
                                 mi, score, alpha, beta, nodes-nodes0, qNodes-qNodes0);
                         System.out.printf("%-6s\n", TextIO.moveToUCIString(m)); */
                         System.out.printf("%-6s %6d %6d %6d%s %s\n",
-                                TextIO.moveToString(pos, m, false), score,
+                                TextIO.moveToString(pos, m, readableForm.SHORT), score,
                                 nodes, qNodes, (score > alpha ? " *" : ""), PV);
                     }
                     if (havePV && (depth > 1)) {

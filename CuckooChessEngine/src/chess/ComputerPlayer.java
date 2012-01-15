@@ -22,6 +22,8 @@ import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
+import chess.TextIO.readableForm;
+
 /**
  * A computer algorithm player.
  * @author petero
@@ -87,7 +89,7 @@ public class ComputerPlayer implements Player {
             Move bookMove = book.getBookMove(pos);
             if (bookMove != null) {
                 System.out.printf("Book moves: %s\n", book.getAllBookMoves(pos));
-                return TextIO.moveToString(pos, bookMove, false);
+                return TextIO.moveToString(pos, bookMove, readableForm.SHORT);
             }
         }
         
@@ -106,7 +108,7 @@ public class ComputerPlayer implements Player {
         }
         currentSearch = null;
 //        tt.printStats();
-        String strMove = TextIO.moveToString(pos, bestM, false);
+        String strMove = TextIO.moveToString(pos, bestM, readableForm.SHORT);
 
         // Claim draw if appropriate
         if (bestM.score <= 0) {
@@ -128,7 +130,7 @@ public class ComputerPlayer implements Player {
         } else if (Search.canClaimDrawRep(pos, posHashList, posHashListSize, posHashListSize)) {
             drawStr = "draw rep";
         } else {
-            String strMove = TextIO.moveToString(pos, move, false);
+            String strMove = TextIO.moveToString(pos, move, readableForm.SHORT);
             posHashList[posHashListSize++] = pos.zobristHash();
             UndoInfo ui = new UndoInfo();
             pos.makeMove(move, ui);
@@ -188,7 +190,7 @@ public class ComputerPlayer implements Player {
         Move bestM = sc.iterativeDeepening(moves, -1, -1, false);
 
         // Extract PV
-        String PV = TextIO.moveToString(pos, bestM, false) + " ";
+        String PV = TextIO.moveToString(pos, bestM, readableForm.SHORT) + " ";
         UndoInfo ui = new UndoInfo();
         pos.makeMove(bestM, ui);
         PV += tt.extractPV(pos);

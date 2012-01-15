@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import chess.TextIO.readableForm;
+
 /**
  *
  * @author petero
@@ -319,7 +321,7 @@ public class Game {
         StringBuilder moves = new StringBuilder();
         for (int i = 0; i < moveList.size(); i++) {
             Move move = moveList.get(i);
-            String strMove = TextIO.moveToString(pos, move, false);
+            String strMove = TextIO.moveToString(pos, move, readableForm.SHORT);
             moves.append(String.format(" %s", strMove));
             UndoInfo ui = new UndoInfo();
             pos.makeMove(move, ui);
@@ -352,7 +354,7 @@ public class Game {
         String blackMove = "";
         for (int i = 0; i < currentMove; i++) {
             Move move = moveList.get(i);
-            String strMove = TextIO.moveToString(pos, move, false);
+            String strMove = TextIO.moveToString(pos, move, readableForm.LONG);//TODO right here
             if (drawOfferList.get(i)) {
                 strMove += " (d)";
             }
@@ -423,6 +425,30 @@ public class Game {
         }
         return gameResult;
     }
+    public final String getFinalResultPhrase() { // TODO result phrase
+        String gameResult = "";
+        switch (getGameState()) {
+            case ALIVE:
+                break;
+            case WHITE_MATE:
+            case RESIGN_BLACK:
+                gameResult = "White wins!";
+                break;
+            case BLACK_MATE:
+            case RESIGN_WHITE:
+                gameResult = "Black wins!";
+                break;
+            case WHITE_STALEMATE:
+            case BLACK_STALEMATE:
+            case DRAW_REP:
+            case DRAW_50:
+            case DRAW_NO_MATE:
+            case DRAW_AGREE:
+                gameResult = "Draw";
+                break;
+        }
+        return gameResult;
+    }
 
     /** Return a list of previous positions in this game, back to the last "zeroing" move. */
     public ArrayList<Position> getHistory() {
@@ -484,7 +510,7 @@ public class Game {
                 drawState = rep ? GameState.DRAW_REP : GameState.DRAW_50;
                 drawStateMoveStr = null;
                 if (m != null) {
-                    drawStateMoveStr = TextIO.moveToString(pos, m, false);
+                    drawStateMoveStr = TextIO.moveToString(pos, m, readableForm.SHORT);
                 }
             } else {
                 pendingDrawOffer = true;

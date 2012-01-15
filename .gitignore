@@ -1,11 +1,17 @@
 .*
 !.gitignore
+<<<<<<< HEAD
 !.classpath
 !.project
+=======
+>>>>>>> master
 *.apk
 *.class
 *.ap_ 
 *.dex
 CuckooChessAPK/bin
 CuckooChessEngine/bin
+<<<<<<< HEAD
 *~
+=======
+>>>>>>> master
