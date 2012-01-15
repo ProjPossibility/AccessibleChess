@@ -1,0 +1,8 @@
+.*
+!.gitignore
+*.apk
+*.class
+*.ap_ 
+*.dex
+CuckooChessAPK/bin
+CuckooChessEngine/bin
