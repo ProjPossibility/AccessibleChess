@@ -81,7 +81,7 @@ public class CuckooChess extends Activity implements GUIInterface {
 		    public void handleMessage(Message message) {  
 			    SmsMessage msg = (SmsMessage)message.obj;
 			    String body = msg.getDisplayMessageBody();
-			    
+			    Matcher m = Pattern.compile("").matcher("");
 //			    Log.i("",msg.getDisplayMessageBody());
 		    }  
 	}
