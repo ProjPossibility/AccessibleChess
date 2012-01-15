@@ -1,6 +1,7 @@
 .*
 !.gitignore
 !.classpath
+!.project
 *.apk
 *.class
 *.ap_ 
@@ -8,3 +9,4 @@
 *.bin
 CuckooChessAPK/bin
 CuckooChessEngine/bin
+*~

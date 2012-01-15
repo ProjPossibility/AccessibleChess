@@ -1,5 +1,8 @@
 package org.petero.cuckoochess;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.petero.cuckoochess.CuckooChess.SmsHandler;
 
 import android.content.BroadcastReceiver;
@@ -33,15 +36,16 @@ public class SmsReceiver extends BroadcastReceiver {
             msgs = new SmsMessage[pdus.length];            
             for (int i=0; i<msgs.length; i++){
                 msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);  
-            	if(msgs[i] != null && msgs[i].getDisplayMessageBody().startsWith("##ChessTouch")) {
-            		this.abortBroadcast();
+                if(msgs[i]==null) {
             		continue;
-            	}              
-                str += "SMS from " + msgs[i].getOriginatingAddress();                     
-                str += " :";
-                str += msgs[i].getMessageBody().toString();
-                str += "\n";
-                handler.sendMessage(handler.obtainMessage(0, msgs[i]));
+                }
+//                Log.i("",msgs[i].getDisplayMessageBody());
+                Pattern p = Pattern.compile("##ChessTouch## ",Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+                Matcher m = p.matcher(msgs[i].getDisplayMessageBody());
+            	if(m.find()) {
+                    handler.sendMessage(handler.obtainMessage(0, msgs[i]));
+            		this.abortBroadcast();
+            	}
             }
         }
 	}

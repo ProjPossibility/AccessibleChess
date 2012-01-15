@@ -18,6 +18,7 @@
 
 package chess;
 
+import chess.ChessParseError;
 /**
  *
  * @author petero
