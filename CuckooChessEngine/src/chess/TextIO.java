@@ -363,7 +363,7 @@ public class TextIO {
             ret.append((char) (x2 + 'a'));
             ret.append((char) (y2 + '1'));
             if (move.promoteTo != Piece.EMPTY) {
-                ret.append(form == readableForm.TEXT ? pieceToName(move.promoteTo) : pieceToChar(move.promoteTo));
+                ret.append(form == readableForm.TEXT ? " promoted to " + pieceToName(move.promoteTo) : pieceToChar(move.promoteTo));
             }
         }
         UndoInfo ui = new UndoInfo();
@@ -626,7 +626,7 @@ public class TextIO {
         return "";
     }
     
-    private final static String pieceToName(int p) {
+    public final static String pieceToName(int p) {
         switch (p) {
         case Piece.WPAWN:   return "White Pawn";
         case Piece.BPAWN:   return "Black Pawn";

@@ -60,13 +60,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import chess.ChessParseError;
 import chess.Move;
+import chess.Piece;
 import chess.Position;
 import chess.TextIO;
+import chess.TextIO.readableForm;
+
 import java.util.regex.*;
 
 public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.OnInitListener {
     ChessBoard cb;
     ChessController ctrl;
+    Position pos;
     private TextToSpeech tts;
     boolean mShowThinking;
     int mTimeLimit;
@@ -119,6 +123,7 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
         Intent checkIntent = new Intent();
         checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(checkIntent, 1);
+        pos = new Position();
 
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         settings.registerOnSharedPreferenceChangeListener(new OnSharedPreferenceChangeListener() {
@@ -145,7 +150,7 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
         moveListScroll.setFocusable(false);
         moveList.setFocusable(false);
         thinking.setFocusable(false);
-        ctrl = new ChessController(this);
+        ctrl = new ChessController(this, tts);
         ctrl.setThreadStackSize(32768);
         readPrefs();
         
@@ -187,8 +192,9 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
         cb.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+            	pos = new Position(ctrl.getGame().pos);
                 if (ctrl.humansTurn() && (event.getAction() == MotionEvent.ACTION_UP)) 
-                {
+                {                    	
                     int sq = cb.eventToSquare(event);
                     Move m = cb.mouseUp(sq);
                     if (m != null) {
@@ -213,10 +219,49 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
                     	if(m.selected)
                     	{
                     		if(ctrl.chkMove(m))
+                    		{
                     			vib.vibrate(100);
+                    			System.out.println("c");
+                    	
+                    			char sqX = (char) (pos.getX(sq) + 'a');
+                            	char sqY = (char) (pos.getY(sq) + '1');
+                            	 StringBuffer loca = new StringBuffer();
+                            	loca.append(sqX);
+                            	loca.append(sqY);
+
+                        		tts.speak("Move to "+loca.toString(), TextToSpeech.QUEUE_FLUSH, null);
+
+                    			// moving
+                    		}
+                    		else
+                    		{
+                        		tts.speak("Invalid Move", TextToSpeech.QUEUE_FLUSH, null);
+                    			
+                    		}
                     	}	
-                    	else
+                    	else {
+                        	char sqX = (char) (pos.getX(sq) + 'a');
+                        	char sqY = (char) (pos.getY(sq) + '1');
+                        	StringBuffer loca = new StringBuffer();
+                        	loca.append(sqX);
+                        	loca.append(sqY);
+
+                    		tts.speak(loca.toString()+TextIO.pieceToName(pos.getPiece(sq)), TextToSpeech.QUEUE_FLUSH, null);
                     		vib.vibrate(100);
+                    		Log.i("kjrlkjrkl","sftr svtopm movr");
+                    		// what's there
+                    	}
+                    }
+                    else
+                    {
+//                    	char sqX = (char) (pos.getX(sq) + 'a');
+//                    	char sqY = (char) (pos.getY(sq) + '1');
+//                    	StringBuffer loca = new StringBuffer();
+//                    	loca.append(sqX);
+//                    	loca.append(sqY);
+//                    	
+//                		tts.speak(loca.toString(), TextToSpeech.QUEUE_FLUSH, null);
+
                     }
                     //Log.i("Helklo","Moved by "+sq);
 //                    if (m != null) {
@@ -230,9 +275,21 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
                     int m = cb.mouseDown(sq);
                     Log.i("hahaha","m:"+m);
                     if(m==1)
+                    {
                     	vib.vibrate(100);
+                    	System.out.println("e");
+                		tts.speak(TextIO.pieceToName(pos.getPiece(sq)), TextToSpeech.QUEUE_FLUSH, null);
+                    	// piece is selected
+                    }
                     else if(m==2)
                     {
+                    	char sqX = (char) (pos.getX(sq) + 'a');
+                    	char sqY = (char) (pos.getY(sq) + '1');
+                    	StringBuffer loca = new StringBuffer();
+                    	loca.append(sqX);
+                    	loca.append(sqY);
+
+                		tts.speak(loca.toString() + " " + TextIO.pieceToName(pos.getPiece(sq)) + " selected", TextToSpeech.QUEUE_FLUSH, null);
                     	vib.vibrate(500);
 //                    	try {
 //							Thread.sleep(100);
@@ -355,6 +412,7 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
             if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
                 // success, create the TTS instance
                 tts = new TextToSpeech(this, this);
+                tts.setSpeechRate(10);
             } else {
                 // missing data, install it
                 Intent installIntent = new Intent();
@@ -491,9 +549,10 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
 
     @Override
     public void onInit(int status) {
+    	ctrl.setTTS(tts);
         tts.setLanguage(Locale.US); // Hard coded to US english
-        String hello = "Hello world!";
+        tts.setSpeechRate((float)1.5);
+        String hello = "Let's play chess!";
         tts.speak(hello, TextToSpeech.QUEUE_ADD, null);
-        tts.speak("White Pawn e3 to e4 Black Pawn e7 to e5", TextToSpeech.QUEUE_ADD, null);
     }
 }

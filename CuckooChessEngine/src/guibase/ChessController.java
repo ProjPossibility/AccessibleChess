@@ -34,11 +34,14 @@ import chess.TextIO.readableForm;
 import chess.UndoInfo;
 import chess.Game.GameState;
 
+import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
+
+import android.speech.tts.TextToSpeech;
 
 /**
  * The glue between the chess engine and the GUI.
@@ -141,12 +144,18 @@ public class ChessController {
     SearchListener listener;
 	private boolean twoPlayer;
 	private boolean overSMS;
+	TextToSpeech tts;
     
-    public ChessController(GUIInterface gui) {
+    public ChessController(GUIInterface gui, TextToSpeech textto) {
         this.gui = gui;
         listener = new SearchListener();
         thinkingPV = "";
         threadStack = 0;
+        this.tts = textto;
+    }
+    
+    public void setTTS(TextToSpeech textto) {
+    	this.tts = textto;
     }
 
     public void setThreadStackSize(int size) {
@@ -189,6 +198,10 @@ public class ChessController {
         if(!twoPlayer) {
         	startComputerThinking();
         }
+    }
+    
+    public final Game getGame() {
+    	return game;
     }
     
     public final void setPosHistory(List<String> posHistStr) {
@@ -474,6 +487,8 @@ public class ChessController {
         for (int mi = 0; mi < moves.size; mi++) {
             Move m = moves.m[mi];
             if ((m.from == move.from) && (m.to == move.to)) {
+            	if (tts != null)
+            	//tts.speak(TextIO.moveToString(pos, m, readableForm.TEXT), TextToSpeech.QUEUE_FLUSH, null);
                 if ((m.promoteTo != Piece.EMPTY) && (promoteTo == Piece.EMPTY)) {
                     promoteMove = m;
                     gui.requestPromotePiece();
@@ -517,12 +532,19 @@ public class ChessController {
         gui.setPosition(game.pos);
     }
 
-    final private void setStatusString() {
+    final private void setStatusString() { //TODO
         String str = game.pos.whiteMove ? "White's move" : "Black's move";
         if (computerThread != null) str += " (thinking)";
         if (game.getGameState() != Game.GameState.ALIVE) {
             str = game.getGameStateString();
+        	tts.speak(TextIO.moveToString(game.pos, game.getLastMove(), readableForm.TEXT), TextToSpeech.QUEUE_FLUSH, null);
+        	//tts.speak("trees", TextToSpeech.QUEUE_FLUSH, null);
+
         }
+        if (tts != null)
+        	tts.speak(TextIO.moveToString(game.pos, game.getLastMove(), readableForm.TEXT), TextToSpeech.QUEUE_FLUSH, null);
+
+    	//tts.speak(TextIO.moveToString(game.pos, game.getLastMove(), readableForm.TEXT), TextToSpeech.QUEUE_FLUSH, null);
         gui.setStatusString(str);
     }
 
