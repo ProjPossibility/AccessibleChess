@@ -17,7 +17,7 @@
 */
 
 package chess;
-
+import chess.ChessParseError;
 import chess.TranspositionTable.TTEntry;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

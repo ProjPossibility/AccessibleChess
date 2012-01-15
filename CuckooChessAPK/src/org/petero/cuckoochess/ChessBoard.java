@@ -248,6 +248,32 @@ public class ChessBoard extends View {
         }
         return sq;
     }
+    /**
+    Move getMove(int sq1, int sq2) {
+    	 if (sq1 < 0 || sq2 < 0 || sq1 > 63 || sq2 > 63)
+             return null;
+         if (sq1 >= 0) {
+             int p = pos.getPiece(sq1);
+             if ((p == Piece.EMPTY) || (Piece.isWhite(p) != pos.whiteMove)) {
+            	 //maybe needed???
+//                 setSelection(-1); // Remove selection of opponents last moving piece
+             }
+         }
+
+         int p = pos.getPiece(sq1);
+         if (sq1 >= 0) {
+             if (sq2 != sq1) {
+                 if ((p == Piece.EMPTY) || (Piece.isWhite(p) != pos.whiteMove)) {
+                     Move m = new Move(sq1, sq2, Piece.EMPTY);
+//                     setSelection(sq);
+                     return m;
+                 }
+             }
+             setSelection(-1);
+         }
+         return null;
+    }
+    */
 
     final Move mousePressed(int sq) {
         if (sq < 0)
