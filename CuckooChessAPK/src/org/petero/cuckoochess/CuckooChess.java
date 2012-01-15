@@ -26,6 +26,7 @@ import guibase.GUIInterface;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -33,8 +34,11 @@ import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.text.ClipboardManager;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -62,6 +66,8 @@ public class CuckooChess extends Activity implements GUIInterface {
     TextView moveList;
     TextView thinking;
     
+    Vibrator vib;
+    
     SharedPreferences settings;
 
     private void readPrefs() {
@@ -77,6 +83,9 @@ public class CuckooChess extends Activity implements GUIInterface {
         status.setTextSize(fontSize);
         moveList.setTextSize(fontSize);
         thinking.setTextSize(fontSize);
+        
+        vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
     }
     
     /** Called when the activity is first created. */
@@ -145,12 +154,66 @@ public class CuckooChess extends Activity implements GUIInterface {
         cb.setOnTouchListener(new OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (ctrl.humansTurn() && (event.getAction() == MotionEvent.ACTION_UP)) {
+                if (ctrl.humansTurn() && (event.getAction() == MotionEvent.ACTION_UP)) 
+                {
                     int sq = cb.eventToSquare(event);
-                    Move m = cb.mousePressed(sq);
+                    Move m = cb.mouseUp(sq);
                     if (m != null) {
-                        ctrl.humanMove(m);
+                        Log.i("Helklo","Moved byaaa "+m.to);
+                        if(ctrl.humanMove(m))
+                        {
+                        	vib.vibrate(500);
+                        }
+                        else
+                        {
+                        	cb.cancelMove();
+                        }
                     }
+                    return false;
+                }
+                else if (ctrl.humansTurn() && (event.getAction() == MotionEvent.ACTION_MOVE )) 
+                {
+                    int sq = cb.eventToSquare(event);
+                    Move m = cb.mouseMoved(sq);
+                    if(m!=null)
+                    {
+                    	if(m.selected)
+                    	{
+                    		if(ctrl.chkMove(m))
+                    			vib.vibrate(100);
+                    	}	
+                    	else
+                    		vib.vibrate(100);
+                    }
+                    //Log.i("Helklo","Moved by "+sq);
+//                    if (m != null) {
+//                        ctrl.humanMove(m);
+//                    }
+                    return false;
+                }
+                else if (ctrl.humansTurn() &&(event.getAction() == MotionEvent.ACTION_DOWN))
+                {
+                    int sq = cb.eventToSquare(event);
+                    int m = cb.mouseDown(sq);
+                    Log.i("hahaha","m:"+m);
+                    if(m==1)
+                    	vib.vibrate(100);
+                    else if(m==2)
+                    {
+                    	vib.vibrate(500);
+//                    	try {
+//							Thread.sleep(100);
+//						} catch (InterruptedException e) {
+//							// TODO Auto-generated catch block
+//							e.printStackTrace();
+//						}
+                    	vib.vibrate(100);
+                    }
+                                 	
+                    //Log.i("Helklo","Moved by "+sq);
+//                    if (m != null) {
+//                        ctrl.humanMove(m);
+//                    }
                     return false;
                 }
                 return false;
@@ -167,14 +230,14 @@ public class CuckooChess extends Activity implements GUIInterface {
                 }
             }
         });
-        cb.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (!ctrl.computerThinking())
-                    showDialog(CLIPBOARD_DIALOG);
-                return true;
-            }
-        });
+//        cb.setOnLongClickListener(new OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                if (!ctrl.computerThinking())
+//                    showDialog(CLIPBOARD_DIALOG);
+//                return true;
+//            }
+//        });
     }
 
     @Override
@@ -203,6 +266,21 @@ public class CuckooChess extends Activity implements GUIInterface {
         super.onDestroy();
     }
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) 
+	{
+		if (keyCode == KeyEvent.KEYCODE_VOLUME_UP) 
+		{
+
+		}
+		else if (keyCode == KeyEvent.KEYCODE_VOLUME_DOWN) 
+		{
+
+		}
+		return super.onKeyDown(keyCode, event);
+	}
+
+    
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.options_menu, menu);
