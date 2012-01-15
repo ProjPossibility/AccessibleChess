@@ -36,6 +36,8 @@ public class Move {
 
     public int score;
     
+    public boolean selected=false;
+    
     /** Create a move object. */
     public Move(int from, int to, int promoteTo) {
         this.from = from;
@@ -44,6 +46,14 @@ public class Move {
         this.score = 0;
     }
 
+    public Move(int from, int to, int promoteTo, boolean selected_inp) {
+        this.from = from;
+        this.to = to;
+        this.promoteTo = promoteTo;
+        this.score = 0;
+        this.selected=selected_inp;
+    }
+    
     public Move(int from, int to, int promoteTo, int score) {
         this.from = from;
         this.to = to;

@@ -422,17 +422,20 @@ public class ChessController {
         }
     }
 
-    public final void humanMove(Move m) {
+    public final boolean humanMove(Move m) {
         if (humansTurn()) {
             if (doMove(m)) {
                 updateGUI();
                 if(!twoPlayer) {
                 startComputerThinking();
                 }
+                return true;
             } else {
                 gui.setSelection(-1);
+                return false;
             }
         }
+        return false;
     }
 
     Move promoteMove;
@@ -463,7 +466,7 @@ public class ChessController {
      * Move a piece from one square to another.
      * @return True if the move was legal, false otherwise.
      */
-    final private boolean doMove(Move move) {
+    final public boolean doMove(Move move) {
         Position pos = game.pos;
         MoveGen.MoveList moves = new MoveGen().pseudoLegalMoves(pos);
         MoveGen.removeIllegal(pos, moves);
@@ -484,6 +487,25 @@ public class ChessController {
             }
         }
         gui.reportInvalidMove(move);
+        return false;
+    }
+    
+    final public boolean chkMove(Move move) {
+        Position pos = game.pos;
+        MoveGen.MoveList moves = new MoveGen().pseudoLegalMoves(pos);
+        MoveGen.removeIllegal(pos, moves);
+        int promoteTo = move.promoteTo;
+        for (int mi = 0; mi < moves.size; mi++) {
+            Move m = moves.m[mi];
+            if ((m.from == move.from) && (m.to == move.to)) {
+                if ((m.promoteTo != Piece.EMPTY) && (promoteTo == Piece.EMPTY)) {
+                    return false;
+                }
+                if (m.promoteTo == promoteTo) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
