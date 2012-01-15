@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.petero.cuckoochess"
     android:versionCode="2"
-    android:versionName="1.05"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:versionName="1.05">
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
