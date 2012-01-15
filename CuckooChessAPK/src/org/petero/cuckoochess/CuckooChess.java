@@ -81,7 +81,11 @@ public class CuckooChess extends Activity implements GUIInterface {
 		    public void handleMessage(Message message) {  
 			    SmsMessage msg = (SmsMessage)message.obj;
 			    String body = msg.getDisplayMessageBody();
-			    Matcher m = Pattern.compile("").matcher("");
+			    Pattern p = Pattern.compile("##ChessTouch(\\d+)## ([a-h][1-8]) ([a-h][1-8])",Pattern.CASE_INSENSITIVE | Pattern.DOTALL);
+			    Matcher m = p.matcher(body);
+			    if(m.find()) {
+			    	Log.i("found",body);
+			    }
 //			    Log.i("",msg.getDisplayMessageBody());
 		    }  
 	}
