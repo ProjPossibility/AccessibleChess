@@ -27,6 +27,7 @@ import chess.MoveGen;
 import chess.Piece;
 import chess.Player;
 import chess.Position;
+import chess.SmsPlayer;
 import chess.Search;
 import chess.TextIO;
 import chess.UndoInfo;
@@ -44,10 +45,11 @@ import java.util.Scanner;
  */
 public class ChessController {
     Player humanPlayer;
+    Player player2;
     ComputerPlayer computerPlayer;
     Game game;
     GUIInterface gui;
-    boolean humanIsWhite;
+    boolean playerIsWhite;
     Thread computerThread;
     int threadStack;       // Thread stack size, or zero to use OS default
 
@@ -136,6 +138,8 @@ public class ChessController {
         }
     }
     SearchListener listener;
+	private boolean twoPlayer;
+	private boolean overSMS;
     
     public ChessController(GUIInterface gui) {
         this.gui = gui;
@@ -148,24 +152,42 @@ public class ChessController {
         threadStack = size;
     }
     
-    public final void newGame(boolean humanIsWhite, int ttLogSize, boolean verbose) {
+    public final void newGame(boolean playerIsWhite, boolean twoPlayer, boolean overSms, int ttLogSize, boolean verbose) {
         stopComputerThinking();
-        this.humanIsWhite = humanIsWhite;
+        this.playerIsWhite = playerIsWhite;
+        this.twoPlayer = twoPlayer;
+        this.overSMS = overSms;
         humanPlayer = new HumanPlayer();
-        computerPlayer = new ComputerPlayer();
-        computerPlayer.verbose = verbose;
-        computerPlayer.setTTLogSize(ttLogSize);
-        computerPlayer.setListener(listener);
-        if (humanIsWhite) {
-            game = new Game(humanPlayer, computerPlayer);
+        if(twoPlayer) {
+        	if(overSms)
+        	{
+        		player2 = new SmsPlayer();
+        	} else {
+                player2 = new HumanPlayer();
+        	}
+        	if (playerIsWhite) {
+                game = new Game(humanPlayer, player2);
+            } else {
+                game = new Game(player2, humanPlayer);
+            }
         } else {
-            game = new Game(computerPlayer, humanPlayer);
+	        computerPlayer = new ComputerPlayer();
+	        computerPlayer.verbose = verbose;
+	        computerPlayer.setTTLogSize(ttLogSize);
+	        computerPlayer.setListener(listener);
+	        if (playerIsWhite) {
+	            game = new Game(humanPlayer, computerPlayer);
+	        } else {
+	            game = new Game(computerPlayer, humanPlayer);
+	        } 
         }
     }
     public final void startGame() {
         gui.setSelection(-1);
         updateGUI();
-        startComputerThinking();
+        if(!twoPlayer) {
+        	startComputerThinking();
+        }
     }
     
     public final void setPosHistory(List<String> posHistStr) {
@@ -214,7 +236,7 @@ public class ChessController {
         pgn.append(String.format("[Date \"%04d.%02d.%02d\"]%n", year, month, day));
         String white = "Player";
         String black = ComputerPlayer.engineName;
-        if (!humanIsWhite) {
+        if (!playerIsWhite) {
             String tmp = white; white = black; black = tmp;
         }
         pgn.append(String.format("[White \"%s\"]%n", white));
@@ -345,15 +367,18 @@ public class ChessController {
     public final void setHumanWhite(final boolean humanIsWhite) {
         if (computerThread != null)
             return;
-        if (this.humanIsWhite != humanIsWhite) {
-            this.humanIsWhite = humanIsWhite;
+        if (this.playerIsWhite != humanIsWhite) {
+            this.playerIsWhite = humanIsWhite;
             game.processString("swap");
             startComputerThinking();
         }
     }
     
     public final boolean humansTurn() {
-        return game.pos.whiteMove == humanIsWhite;
+    	if(twoPlayer && !overSMS) {
+    		return true;
+    	}
+        return game.pos.whiteMove == playerIsWhite;
     }
     public final boolean computerThinking() {
         return computerThread != null;
@@ -400,7 +425,9 @@ public class ChessController {
         if (humansTurn()) {
             if (doMove(m)) {
                 updateGUI();
+                if(!twoPlayer) {
                 startComputerThinking();
+                }
             } else {
                 gui.setSelection(-1);
             }
@@ -497,7 +524,7 @@ public class ChessController {
 
     
     private void startComputerThinking() {
-        if (game.pos.whiteMove != humanIsWhite) {
+        if (game.pos.whiteMove != playerIsWhite) {
             if (computerThread == null) {
                 Runnable run = new Runnable() {
                     public void run() {

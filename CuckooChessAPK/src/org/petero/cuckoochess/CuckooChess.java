@@ -28,13 +28,22 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
+import android.telephony.PhoneStateListener;
+import android.telephony.PhoneNumberUtils;
+import android.telephony.SmsManager;
+import android.telephony.SmsMessage;
 import android.text.ClipboardManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -63,6 +72,16 @@ public class CuckooChess extends Activity implements GUIInterface {
     TextView thinking;
     
     SharedPreferences settings;
+    
+    SmsManager sms;
+    
+	class SmsHandler extends Handler {
+		   @Override  
+		    public void handleMessage(Message message) {  
+			    SmsMessage msg = (SmsMessage)message.obj;
+			    Log.i("",msg.getDisplayMessageBody());
+		    }  
+	}
 
     private void readPrefs() {
         mShowThinking = settings.getBoolean("showThinking", false);
@@ -93,6 +112,12 @@ public class CuckooChess extends Activity implements GUIInterface {
             }
         });
         
+        sms = SmsManager.getDefault();
+        IntentFilter filter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
+        filter.setPriority(1000);
+        SmsReceiver receiver = new SmsReceiver(new SmsHandler());
+        this.registerReceiver(receiver, filter);
+        
         setContentView(R.layout.main);
         status = (TextView)findViewById(R.id.status);
         moveListScroll = (ScrollView)findViewById(R.id.scrollView);
@@ -113,7 +138,7 @@ public class CuckooChess extends Activity implements GUIInterface {
         cb.requestFocus();
         cb.setClickable(true);
 
-        ctrl.newGame(playerWhite, ttLogSize, false);
+        ctrl.newGame(playerWhite, false, false, ttLogSize, false);
         {
             String fen = "";
             String moves = "";
@@ -213,7 +238,7 @@ public class CuckooChess extends Activity implements GUIInterface {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
         case R.id.item_new_game:
-            ctrl.newGame(playerWhite, ttLogSize, false);
+            ctrl.newGame(playerWhite, false, false, ttLogSize, false);
             ctrl.startGame();
             return true;
         case R.id.item_undo:
