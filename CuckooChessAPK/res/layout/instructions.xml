@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"        
+        android:textSize="10sp"
+        android:layout_weight="0.02"        
+        />
+    <TextView
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:text="Instructions"
+        android:textSize="45sp"
+        android:gravity="center" 
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        />
+    <TextView
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:text="To locate chess pieces, move a finger over the screen. If a chess piece is touched, your phone will vibrate and tell you more information. To select that piece, lift your finger and quickly hold the same position. To move the piece, drag the piece to the destination square. If it is a valid move, the phone will vibrate and confirm the move. If it is an invalid move, the selection is cancelled. To choose another chess piece, wait one second and then continue locating other pieces on the board.
+        			\n\nImportant events have both Audio and Haptic Feedback."
+        android:textSize="15sp"
+        android:gravity="center"
+        android:layout_weight="0.98"
+        />
+</LinearLayout>

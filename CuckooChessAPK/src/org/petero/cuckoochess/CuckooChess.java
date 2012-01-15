@@ -1,6 +1,6 @@
 /*
     CuckooChess - A java chess program.
-    Copyright (C) 2011  Peter Ã–sterlund, peterosterlund2@gmail.com
+    Copyright (C) 2011  Peter Österlund, peterosterlund2@gmail.com
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -63,7 +63,11 @@ import chess.Move;
 import chess.Piece;
 import chess.Position;
 import chess.TextIO;
+<<<<<<< Updated upstream
 import chess.TextIO.readableForm;
+=======
+import android.app.ProgressDialog;
+>>>>>>> Stashed changes
 
 import java.util.regex.*;
 
@@ -77,6 +81,7 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
     int mTimeLimit;
     boolean playerWhite;
     static final int ttLogSize = 16; // Use 2^ttLogSize hash entries.
+    ProgressDialog dialog;
     
     TextView status;
     ScrollView moveListScroll;
@@ -120,11 +125,15 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+<<<<<<< Updated upstream
         super.onCreate(savedInstanceState);
         Intent checkIntent = new Intent();
         checkIntent.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
         startActivityForResult(checkIntent, 1);
         pos = new Position();
+=======
+    	super.onCreate(savedInstanceState);
+>>>>>>> Stashed changes
 
         settings = PreferenceManager.getDefaultSharedPreferences(this);
         settings.registerOnSharedPreferenceChangeListener(new OnSharedPreferenceChangeListener() {
@@ -142,6 +151,29 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
         this.registerReceiver(receiver, filter);
         
         setContentView(R.layout.main);
+        
+        Bundle extras= this.getIntent().getExtras();
+        if(extras!=null)
+        {
+        	String type = extras.getString("type");
+        	if(type.equals("computer"))
+        	{
+        		
+        	}
+        	else if(type.equals("lm"))
+        	{
+        		
+        	}
+        	else if(type.equals("sms"))
+        	{
+        		
+        	}
+        	else if(type.equals("cotinue"))
+        	{
+        		
+        	}
+        }
+        
         status = (TextView)findViewById(R.id.status);
         moveListScroll = (ScrollView)findViewById(R.id.scrollView);
         moveList = (TextView)findViewById(R.id.moveList);
@@ -321,6 +353,7 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
                 }
             }
         });
+<<<<<<< Updated upstream
 //        cb.setOnLongClickListener(new OnLongClickListener() {
 //            @Override
 //            public boolean onLongClick(View v) {
@@ -329,6 +362,17 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
 //                return true;
 //            }
 //        });
+=======
+        cb.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+            	showDialog(LOADING);
+                if (!ctrl.computerThinking())
+                    showDialog(CLIPBOARD_DIALOG);
+                return true;
+            }
+        });
+>>>>>>> Stashed changes
     }
 
     @Override
@@ -348,6 +392,7 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
         editor.putString("moves", posHistStr.get(1));
         editor.putString("numUndo", posHistStr.get(2));
         editor.commit();
+        //removeDialog(LOADING);
         super.onPause();
     }
 
@@ -471,10 +516,19 @@ public class CuckooChess extends Activity implements GUIInterface, TextToSpeech.
 
     static final int PROMOTE_DIALOG = 0; 
     static final int CLIPBOARD_DIALOG = 1; 
+    static final int LOADING = 2;
     
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
+        case LOADING:
+        {
+        	dialog = new ProgressDialog(this);
+        	dialog.setMessage("Loading. Please wait...");
+        	dialog.setIndeterminate(true);
+        	dialog.setCancelable(true);
+        	return dialog;
+        }
         case PROMOTE_DIALOG: {
             final CharSequence[] items = {"Queen", "Rook", "Bishop", "Knight"};
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
