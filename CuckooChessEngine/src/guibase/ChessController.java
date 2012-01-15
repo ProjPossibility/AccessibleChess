@@ -140,7 +140,7 @@ public class ChessController {
     }
     SearchListener listener;
 	private boolean twoPlayer;
-	private boolean overSMS;
+	private boolean overSms;
     
     public ChessController(GUIInterface gui) {
         this.gui = gui;
@@ -157,7 +157,7 @@ public class ChessController {
         stopComputerThinking();
         this.playerIsWhite = playerIsWhite;
         this.twoPlayer = twoPlayer;
-        this.overSMS = overSms;
+        this.overSms = overSms;
         humanPlayer = new HumanPlayer();
         if(twoPlayer) {
         	if(overSms)
@@ -376,7 +376,7 @@ public class ChessController {
     }
     
     public final boolean humansTurn() {
-    	if(twoPlayer && !overSMS) {
+    	if(twoPlayer && !overSms) {
     		return true;
     	}
         return game.pos.whiteMove == playerIsWhite;
@@ -421,9 +421,18 @@ public class ChessController {
             setSelection();
         }
     }
+    
+    private boolean smsTurn() {
+    	return overSms && twoPlayer;
+    }
 
+<<<<<<< HEAD
     public final boolean humanMove(Move m) {
         if (humansTurn()) {
+=======
+    public final void humanMove(Move m) {
+        if (humansTurn() || smsTurn()) {
+>>>>>>> almost done SMS
             if (doMove(m)) {
                 updateGUI();
                 if(!twoPlayer) {
@@ -474,6 +483,8 @@ public class ChessController {
         for (int mi = 0; mi < moves.size; mi++) {
             Move m = moves.m[mi];
             if ((m.from == move.from) && (m.to == move.to)) {
+            	//valid move
+            	
                 if ((m.promoteTo != Piece.EMPTY) && (promoteTo == Piece.EMPTY)) {
                     promoteMove = m;
                     gui.requestPromotePiece();

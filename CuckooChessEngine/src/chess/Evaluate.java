@@ -21,6 +21,7 @@ package chess;
 import java.io.IOException;
 import java.io.InputStream;
 
+import chess.ChessParseError;
 /**
  * Position evaluation routines.
  * 

@@ -19,6 +19,7 @@
 package chess;
 
 import java.security.MessageDigest;
+import chess.ChessParseError;
 import java.security.NoSuchAlgorithmException;
 
 /**
