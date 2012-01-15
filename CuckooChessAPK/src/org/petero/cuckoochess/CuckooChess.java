@@ -57,6 +57,7 @@ import chess.ChessParseError;
 import chess.Move;
 import chess.Position;
 import chess.TextIO;
+import java.util.regex.*;
 
 public class CuckooChess extends Activity implements GUIInterface {
     ChessBoard cb;
@@ -79,7 +80,9 @@ public class CuckooChess extends Activity implements GUIInterface {
 		   @Override  
 		    public void handleMessage(Message message) {  
 			    SmsMessage msg = (SmsMessage)message.obj;
-			    Log.i("",msg.getDisplayMessageBody());
+			    String body = msg.getDisplayMessageBody();
+			    
+//			    Log.i("",msg.getDisplayMessageBody());
 		    }  
 	}
 

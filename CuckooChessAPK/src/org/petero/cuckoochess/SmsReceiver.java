@@ -33,8 +33,7 @@ public class SmsReceiver extends BroadcastReceiver {
             msgs = new SmsMessage[pdus.length];            
             for (int i=0; i<msgs.length; i++){
                 msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);  
-            	if(msgs[i] != null && !msgs[i].getOriginatingAddress().equals("42")) {
-            		
+            	if(msgs[i] != null && msgs[i].getDisplayMessageBody().startsWith("##ChessTouch")) {
             		this.abortBroadcast();
             		continue;
             	}              
